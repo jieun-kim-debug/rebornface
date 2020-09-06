@@ -158,10 +158,15 @@
 			</div>
 			<div class="mt-5 file-upload-content">
 				<img class="file-upload-image" id="face-image" src="#" alt="your image" />
+				<div id="loading" class="animated bounce">
+				<div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p class="text-center">AI가 당신의 환생상을 분석중입니다.</p>
+            </div>
 				<p class="result-message"></p>
 				<div id="label-container"></div>
 
-				<!-- Go to www.addthis.com/dashboard to customize your tools -->
 				<div class="addthis_inline_share_toolbox"></div>
 
 				<div class="image-title-wrap">
@@ -175,16 +180,15 @@
 		<div id="label-container"></div>
 
 		<div id="disqus_thread"></div>
+		
+		    <footer class="footer pt-5 container d-flex justify-content-center">
+        <div>
+            <p>&copy; 김지은 2020. All Rights Reserved. </p>
+        </div>
+    </footer>
+		
 		<script>
-			/**
-			 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-			 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-			/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
+
 			(function () {
 				// DON'T EDIT BELOW THIS LINE
 				var d = document,
@@ -208,7 +212,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 
 					reader.onload = function (e) {
 						$('.image-upload-wrap').hide();
-
+						$('#loading').show();
 						$('.file-upload-image').attr('src', e.target.result);
 						$('.file-upload-content').show();
 
@@ -219,6 +223,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 					init().then(() => {
 						console.log('hello');
 						predict();
+						$('#loading').hide();
 					});
 				} else {
 					removeUpload();
